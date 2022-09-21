@@ -1,0 +1,362 @@
+/* ==== Global rules ==== */
+@import url("https://fonts.googleapis.com/css?family=Merriweather:300,300i,400,400i,700,700i,900,900i");
+/* @import url("https://use.fontawesome.com/releases/v5.2.0/css/all.css"); */
+@import url("https://use.fontawesome.com/releases/v5.15.4/css/all.css");
+* {
+  box-sizing: border-box;
+  transition: ease all 0.5s;
+  margin: 0 auto;
+}
+
+body {
+  font-family: "Merriweather", Cambria, Cochin, Georgia, Times,
+    "Times New Roman", serif;
+  color: #2d3945;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+header {
+  margin: 0;
+  width: 100%;
+  display: block;
+  text-align: center;
+  color: white;
+  background-color: #2d3945;
+  padding: 15px 0;
+}
+
+h1 {
+  font-stretch: ultra-condensed;
+  text-transform: uppercase;
+  font-size: 1.2em;
+  font-weight: bolder;
+  transform: scaleX(0.9);
+}
+
+.top {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.top h2 {
+  margin-top: 30px;
+  margin-bottom: 0.5em;
+  font-weight: bold;
+}
+
+.top p {
+  padding: 0 1em;
+  margin-bottom: 1em;
+}
+
+.top p,
+label {
+  font-size: 0.9em;
+  color: grey;
+  line-height: 1.2em;
+  font-stretch: semi-expanded;
+}
+
+hr {
+  border: 1px solid #2d3945;
+  margin-bottom: 7%;
+  width: 40%;
+}
+.thick {
+  padding: 0;
+  margin: 0 0 0.1em;
+  border-top: 2px solid #2d3945;
+  color: #333;
+  text-align: center;
+}
+
+.wrapper {
+  flex-wrap: wrap;
+  width: 90%;
+}
+
+form {
+  flex: 1 100%;
+  margin: 0 auto;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+fieldset {
+  border: none;
+  padding: 0;
+}
+
+legend {
+  margin: 0 0 5% 0;
+  font-weight: bolder;
+}
+
+label {
+  font-size: 0.9em;
+  margin-right: 1em;
+  width: 100%;
+}
+
+.contact input,
+select,
+textarea {
+  background-color: #eff0f1;
+  border: 0px;
+  border-radius: 5px;
+  width: 100%;
+  text-align: left;
+  align-items: center;
+}
+
+input,
+textarea,
+select {
+  -webkit-transition: box-shadow 1s;
+  transition: box-shadow 1s;
+}
+
+input:hover,
+textarea:hover,
+select:hover {
+  box-shadow: 5px 8px 1px #6983a18a;
+}
+
+.contact input,
+select {
+  height: 3em;
+  font-style: italic;
+  padding-right: 1em;
+  padding-left: 0.5em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+#Zcode {
+  width: 50%;
+}
+
+input::placeholder,
+select option[value="0"],
+select option:disabled {
+  font-size: 0.8em;
+  text-align: right;
+  color: #587c99;
+}
+
+select,
+select option {
+  color: #2d3945;
+  font-size: 0.9em;
+  
+}
+
+[hidden] {
+  display: none;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border: 2px solid #2d3945;
+  outline: none;
+}
+
+.news input {
+  border: 1px #2d3945;
+  border-radius: 5px;
+}
+
+/* =======  Radio Experimental ========= */
+
+.radio input[type="radio"] {
+  position: absolute;
+  display: none;
+  color: #46698b;
+}
+
+.radio input[type="radio"] + label:before {
+  font-family: "Font Awesome 5 Free";
+  color: #46698b;
+  display: inline-block;
+}
+
+.radio input[type="radio"] + label:before {
+  content: "";
+  background: #f4f4f4;
+  border-radius: 100%;
+  border: 0px solid #b4b4b4;
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  position: relative;
+  top: 0.1em;
+  margin-right: 0.9em;
+  vertical-align: text-top;
+  cursor: pointer;
+  text-align: center;
+  transition: all 250ms ease;
+}
+
+input[type="radio"] + label:before {
+  letter-spacing: 10px;
+}
+
+input[type="radio"]:checked + label:before {
+  font-weight: 400;
+  content: "\f192";
+  padding-bottom: 2px;
+}
+
+input[type="radio"]:checked + label:before {
+  letter-spacing: 10px;
+}
+
+/* =======  Checked Experimental ========= */
+input[type="checkbox"] {
+  display: none;
+  color: #46698b;
+} /* to hide the checkbox itself */
+input[type="checkbox"] + label:before {
+  font-family: "Font Awesome 5 Free";
+  color: #46698b;
+  display: inline-block;
+  font-size: 1.16em;
+  padding-left: 1px;
+}
+
+input[type="checkbox"] + label:before {
+  content: "";
+  background: #f4f4f4;
+  border-radius: 2px;
+  border: 0px solid #b4b4b4;
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  position: relative;
+  top: 0em;
+  margin-right: 1em;
+  vertical-align: text-top;
+  cursor: pointer;
+  text-align: center;
+  transition: all 250ms ease;
+}
+
+/* unchecked icon */
+input[type="checkbox"] + label:before {
+  letter-spacing: 10px;
+} /* space between checkbox and label */
+
+input[type="checkbox"]:checked + label:before {
+  font-weight: 400;
+  padding-bottom: 1px;
+  content: "\f14a";
+} /* checked icon */
+input[type="checkbox"]:checked + label:before {
+  letter-spacing: 10px;
+} /* allow space for check mark */
+
+/* ============= Text Area ================== */
+
+textarea {
+  resize: none;
+  padding: 1em;
+  height: 7.85em;
+  color: #2d3945;
+  font-style: oblique;
+  font-size: 0.8em;
+}
+
+/* =============== Buttons =================== */
+button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+button:active,
+button:focus {
+  outline: none;
+  border: none;
+}
+
+button[type="submit"] {
+  background-color: #4ebbb5;
+  height: 4em;
+  color: white;
+  border-radius: 10px;
+  border: none;
+  margin-top: 1.5em;
+  margin-bottom: 1em;
+  font-weight: bolder;
+}
+
+button[type="submit"]:hover {
+  transition: ease-in-out 1s;
+  background-color: #67f1eb;
+  box-shadow: inset 0 0 10px #000000;
+}
+
+button[type="reset"] {
+  background-color: #bb4e4e;
+  height: 2.5em;
+  color: white;
+  border-radius: 10px;
+  border: none;
+  margin-bottom: 1em;
+  font-weight: bolder;
+}
+
+button[type="reset"]:hover {
+  transition: ease-in-out 1s;
+  background-color: #e46161;
+  box-shadow: inset 0 0 10px #000000;
+}
+
+/* ================ Footer ==================== */
+
+footer {
+  color: grey;
+  font-style: italic;
+  font-size: small;
+  margin: 10px 0 20px;
+}
+
+/*=================== MEDIAS ====================*/
+
+@media (min-width: 768px) {
+  * {
+    transition: ease all 0.5s;
+  }
+
+  .wrapper {
+    align-self: center;
+    width: 50%;
+  }
+
+  form {
+    display: flex;
+    align-content: center;
+  }
+
+  div.contact_input {
+    display: flex;
+    align-items: center;
+  }
+
+  div.contact_input label {
+    min-width: 40%;
+    max-width: 20%;
+  }
+
+  div.contact_input #label_Zcode {
+    margin-left: 0;
+  }
+
+  #Zcode {
+    max-width: 20%;
+  }
+}
