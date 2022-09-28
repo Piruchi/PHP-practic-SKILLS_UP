@@ -1,7 +1,7 @@
 <?php
     require '../require/config.php';
 
-    $name = $email = $phone = $address = $city = $communities = $Zcode= $Newsletter= $Newsletter_format = $othert="";
+    $name = $email = $phone = $address = $city = $communities = $Zcode= $Newsletter= $NewsletterFormat = $othert="";
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $name = $_POST["name"];
@@ -12,8 +12,16 @@
         $communities = $_POST["communities"];
         $Zcode = $_POST["Zcode"];
         $Newsletter = $_POST["Newsletter"];
-        $Newsletter_format = $_POST["Newsletter_format"];
+        $NewsletterFormat = $_POST["Newsletter_format"];
         $othert = $_POST["othert"];
+        
+        echo "$name<br>";
+        echo "$email<br>";
+        echo "$phone<br>";
+        echo "$address<br>";
+        echo "$city<br>";
+        echo "$communities<br>";
+        echo "$NewsletterFormat<br>";
   }
 
   function test_input($data) {    //Esta función corrige errores previos que pueda haber puesto el usuario
