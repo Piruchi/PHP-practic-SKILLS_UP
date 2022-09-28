@@ -4,7 +4,9 @@
     $name = $email = $phone = $address = $city = $communities = $Zcode= $Newsletter= $NewsletterFormat = $othert="";
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $name = $_POST["name"];
+
+        if(!empty($_POST["name"]) || !empty ($_POST["email"]) || !empty($_POST["phone"])){
+            $name = $_POST["name"];
         $email = $_POST["email"];
         $phone = $_POST["phone"];
         $address = $_POST["address"];
@@ -14,6 +16,8 @@
         $Newsletter = $_POST["Newsletter"];
         $NewsletterFormat = $_POST["Newsletter_format"];
         $othert = $_POST["othert"];
+        }
+        
         
         echo "$name<br>";
         echo "$email<br>";
@@ -24,7 +28,7 @@
         echo "$NewsletterFormat<br>";
   }
 
-  function test_input($data) {    //Esta función corrige errores previos que pueda haber puesto el usuario
+  function limpiarDatos($data) {    //Esta función corrige errores previos que pueda haber puesto el usuario
     $data = trim($data);
     $data = stripslashes($data);
     $data = htmlspecialchars($data);
@@ -40,4 +44,6 @@ function validar_nombre($name) {
         return true;
     }
 }
+
+
 ?>

@@ -12,3 +12,9 @@ if ($conn->connect_error) {
 }
 echo "Connected successfully";*/
 ?>
+
+<?php //No 
+/*  $host = 'localhost';
+    $dbname = 'databasename';
+    $username = 'username';
+    $password = 'password'; */
