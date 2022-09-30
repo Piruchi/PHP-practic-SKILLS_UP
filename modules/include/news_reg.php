@@ -3,6 +3,7 @@
 
     $name = $email = $phone = $address = $city = $communities = $Zcode= $Newsletter= $NewsletterFormat = $othert="";
 
+    //Declaro una función que usaré más adelante
     function limpiarDatos($data) {    //Esta función corrige errores previos que pueda haber puesto el usuario
         $data = trim($data);    //Limpia los espacios tanto detrás como delante del string
         $data = stripslashes($data);    //
@@ -10,6 +11,15 @@
         return $data;
     }
 
+
+    /*
+    =======================================================================================================
+    SI LOS DATOS ME LLEGAN A TRAVÉS DEL MÉTODO POST VOY A COMPROBAR QUE ME LLEGAN DATOS EN LOS OBLIGATORIOS
+    Y QUE EN LOS NO OBLIGATORIOS REVISAR SI HAY ALGÚN DATO O NO, EN CASO DE QUE NO LE ASIGNO NULL.
+    =======================================================================================================
+     */
+
+    //OBLIGATORIOS
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         print_r ($_POST);
 
@@ -17,29 +27,73 @@
         $name = limpiarDatos($_POST["name"]);
         $email = limpiarDatos($_POST["email"]);
         $phone = limpiarDatos($_POST["phone"]);
-        $address = limpiarDatos($_POST["address"]);
-        $city = limpiarDatos($_POST["city"]);
-        $communities = limpiarDatos($_POST["communities"]);
-        $Zcode = limpiarDatos($_POST["Zcode"]);
-        $Newsletter = limpiarDatos($_POST["Newsletter[]"]);
-        $NewsletterFormat = limpiarDatos($_POST["Newsletter_format"]);
-        $othert = limpiarDatos($_POST["othert"]);
+
+        /*==================================================================================================== */
+
+    //NO OBLIGATORIOS
+        if(isset($_POST["address"])){
+          $address = limpiarDatos($_POST["address"]);
+        } else {
+          $address = null;
+        }
+
+        if(isset($_POST["city"])){
+          $city = limpiarDatos($_POST["city"]);
+         } else {
+          $city = null;
+         }
+
+         if(isset($_POST["comunities"])){
+          $communities = limpiarDatos($_POST["comunities"]);
+         } else {
+           $communities = null;
+         }
+
+         if(isset($_POST["Zcode"])){
+          $Zcode = limpiarDatos($_POST["Zcode"]);
+         } else {
+          $Zcode = null;
+         }
+
+         if(isset($_POST["Newsletter[]"])){
+          $Newsletter = limpiarDatos($_POST["Newsletter[]"]);
+         } else {
+          $Newsletter = null;
+         }
+
+         if(isset($_POST["Newsletter_format"])){
+          $NewsletterFormat = limpiarDatos($_POST["Newsletter_format"]);
+         } else {
+          $NewsletterFormat = null;
+         }
+
+         if(isset($_POST["address"])){
+          $address = limpiarDatos($_POST["address"]);
+         } else {
+          $address = null;
+         }
+
+         if(isset($_POST["othert"])){
+          $othert = limpiarDatos($_POST["othert"]);
+         } else {
+          $othert = null;
+         }
+        /*====================================================================================00 */
         }
         
         
-        /*echo "$name<br>";
-        echo "$email<br>";
-        echo "$phone<br>";
-        echo "$address<br>";
-        echo "$city<br>";
-        echo "$communities<br>";
-        echo "$NewsletterFormat<br>";
-        echo "$othert<br>";*/
+  /*echo "$name<br>";
+  echo "$email<br>";
+  echo "$phone<br>";
+  echo "$address<br>";
+  echo "$city<br>";
+  echo "$communities<br>";
+  echo "$NewsletterFormat<br>";
+  echo "$othert<br>";*/
 
 
   }
 
-  //Nombre, email y número de teléfono
 
 //Función para validar que el campo nombre no esté vacío y que además cumpla las condiciones que queremos
 function validar_nombre($name) {
@@ -73,17 +127,16 @@ function validar_movil($phone){
     }
 }
 
+///^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/
 function validateEmail($email) {
-    if(filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        return true;
-        //echo "{$email}: A valid email"."<br>";
-    }
-    else {
-        return false;
-        //echo "{$email}: Not a valid email"."<br>";
+    if (!preg_match("/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/", $email)){
+      return false;
+    } else {
+      return true;
     }
 }
 
+  //FUNCIONA NAME
   if(validar_nombre($name)){
     echo "El nombre introducido es correcto: $name<br>";
   } else {
@@ -91,11 +144,18 @@ function validateEmail($email) {
   }
 
 
-  //Hay que terminar esto, es simplemente validar y mostrar
+  //FUNCIONA PHONE
   if(validar_movil($phone)){
-    echo "El nombre introducido es correcto: $name<br>";
+    echo "El número introducido es correcto: $phone<br>";
   } else {
-    echo "El nombre introducido es incorrecto: $name<br>";
+    echo "El número introducido es incorrecto: $phone<br>";
+  }
+
+  //COMPRUEBO EMAIL
+  if(validateEmail($email)){
+    echo "El correo introducido es correcto: $email<br>";
+  } else {
+    echo "El correo introducido es incorrecto: $email<br>";
   }
 
 
