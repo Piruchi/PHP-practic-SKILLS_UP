@@ -2,7 +2,7 @@
     require '../require/config.php';
 
     $name = $email = $phone = $address = $city = $communities = $Zcode= $Newsletter= $NewsletterFormat = $othert="";
-
+    $name_err = $email_err= $phone_err = false;
     //Declaro una función que usaré más adelante
     function limpiarDatos($data) {    //Esta función corrige errores previos que pueda haber puesto el usuario
         $data = trim($data);    //Limpia los espacios tanto detrás como delante del string
@@ -10,6 +10,37 @@
         $data = htmlspecialchars($data);    //Limpia caracteres especiales
         return $data;
     }
+
+
+    //FUNCIONES DE VALIDACIÓN DE CAMPOS OBLIGATORIOS QUE USARÉ MÁS ADELANTE
+    
+    //Función para validar que el campo nombre no esté vacío y que además cumpla las condiciones que queremos
+function validar_nombre($name) {
+  if (!preg_match("/^[a-zA-Z-' ]*$/",$name)) {
+      return false;
+  }
+  else {
+      return true;
+  }
+}
+
+function validar_movil($phone){
+  if (!preg_match('/^[0-9]{9}+$/',$phone)) {
+      return false;
+  }
+  else {
+      return true;
+  }
+}
+
+///^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/
+function validateEmail($email) {
+  if (!preg_match("/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/", $email)){
+    return false;
+  } else {
+    return true;
+  }
+}
 
 
     /*
@@ -28,6 +59,29 @@
         $email = limpiarDatos($_POST["email"]);
         $phone = limpiarDatos($_POST["phone"]);
 
+
+
+          //FUNCIONA NAME
+  if(validar_nombre($name)){
+    echo "El nombre introducido es correcto: $name<br>";
+  } else {
+    $name_err = true;
+  }
+
+
+  //FUNCIONA PHONE
+  if(validar_movil($phone)){
+    echo "El número introducido es correcto: $phone<br>";
+  } else {
+    $phone_err = true;
+  }
+
+  //COMPRUEBO EMAIL
+  if(validateEmail($email)){
+    echo "El correo introducido es correcto: $email<br>";
+  } else {
+    $email_err = true;
+  }
         /*==================================================================================================== */
 
     //NO OBLIGATORIOS
@@ -95,15 +149,9 @@
   }
 
 
-//Función para validar que el campo nombre no esté vacío y que además cumpla las condiciones que queremos
-function validar_nombre($name) {
-    if (!preg_match("/^[a-zA-Z-' ]*$/",$name)) {
-        return false;
-    }
-    else {
-        return true;
-    }
-}
+
+
+// ESTA EXPRESIÓN REGULAR POR ALGÚN MOTIVO NO ME FUNCIONA DE FORMA CORRECTA, LA HE CAMBIADO POR UNA MÁS SENCILLA
 
 //Función para validar el campo movil (\+34|0034|34)?[ -]*(6|7)[ -]*([0-9][ -]*){8}
 /*La primera parte (\+34|0034|34)? nos indica que el número que vamos a validar puede empezar por +34, 0034 o 34. Este es el código de país,
@@ -118,45 +166,9 @@ La tercera parte (6|7)[ -]* nos está indicando que el primer número por el que
 Por último ([0-9][ -]*){8} nos está diciendo que tienen que ir 8 caracteres y que estos tienen que estar entre 0 y 9, ambos incluidos. Como en los casos 
 anteriores, detrás de cada uno de estos caracteres puede ir un espacio en blanco, un guión o nada. */
 
-function validar_movil($phone){
-    if (!preg_match("(\+34|0034|34)?[ -]*(6|7)[ -]*([0-9][ -]*){8}",$phone)) {
-        return false;
-    }
-    else {
-        return true;
-    }
-}
-
-///^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/
-function validateEmail($email) {
-    if (!preg_match("/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/", $email)){
-      return false;
-    } else {
-      return true;
-    }
-}
-
-  //FUNCIONA NAME
-  if(validar_nombre($name)){
-    echo "El nombre introducido es correcto: $name<br>";
-  } else {
-    echo "El nombre introducido es incorrecto: $name<br>";
-  }
 
 
-  //FUNCIONA PHONE
-  if(validar_movil($phone)){
-    echo "El número introducido es correcto: $phone<br>";
-  } else {
-    echo "El número introducido es incorrecto: $phone<br>";
-  }
 
-  //COMPRUEBO EMAIL
-  if(validateEmail($email)){
-    echo "El correo introducido es correcto: $email<br>";
-  } else {
-    echo "El correo introducido es incorrecto: $email<br>";
-  }
 
 
 
