@@ -52,50 +52,37 @@ function validateEmail($email) {
 
     //OBLIGATORIOS
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        print_r ($_POST);
-
+    print_r ($_POST);
     if(!empty($_POST["name"]) || !empty ($_POST["email"]) || !empty($_POST["phone"])){
       $name = limpiarDatos($_POST["name"]);
       $email = limpiarDatos($_POST["email"]);
       $phone = limpiarDatos($_POST["phone"]);
 
 
-  //FUNCIONA NAME
-  if(validar_nombre($name)){
-    echo "El nombre introducido es correcto: $name<br>";
-  } else {
-    $name_err = true;
-  }
+      //FUNCIONA NAME
+      if(validar_nombre($name)){
+        echo "El nombre introducido es correcto: $name<br>";
+      } else {
+        $name_err = true;
+      }
 
 
-  //FUNCIONA PHONE
-  if(validar_movil($phone)){
-    echo "El número introducido es correcto: $phone<br>";
-  } else {
-    $phone_err = true;
-  }
+      //FUNCIONA PHONE
+      if(validar_movil($phone)){
+        echo "El número introducido es correcto: $phone<br>";
+      } else {
+        $phone_err = true;
+      }
 
-  //Funciona EMAIL
-  if(validateEmail($email)){
-    echo "El correo introducido es correcto: $email<br>";
-  } else {
-    $email_err = true;
-  }
-        /*===================================================================================================== */
-  if (validar_nombre($name) || validateEmail($email) || validar_movil($phone)){
-
-  }else{
-    if ($name_err == true){
-      echo "El nombre que ha introducido no se corresponde con el formato solicitado";
-    }elseif($email_err == true){
-      echo "El email que ha introducido no se corresponde con el formato solicitado";
-    }elseif($phone_err == true){
-      echo "El número de teléfono que ha introducido no se corresponde con el formato solicitado";
-    }
-  }
-        /*==================================================================================================== */
-
-    //NO OBLIGATORIOS
+      //Funciona EMAIL
+      if(validateEmail($email)){
+        echo "El correo introducido es correcto: $email<br>";
+      } else {
+        $email_err = true;
+      }
+      /*===================================================================================================== */
+      if (validar_nombre($name) && validateEmail($email) && validar_movil($phone)){    
+        //NO OBLIGATORIOS
         if(isset($_POST["address"])){
           $address = limpiarDatos($_POST["address"]);
         } else {
@@ -104,62 +91,59 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if(isset($_POST["city"])){
           $city = limpiarDatos($_POST["city"]);
-         } else {
+        } else {
           $city = null;
-         }
-
-         if(isset($_POST["comunities"])){
+        }
+        
+        if(isset($_POST["comunities"])){
           $communities = limpiarDatos($_POST["comunities"]);
-         } else {
-           $communities = null;
-         }
+        } else {
+            $communities = null;
+        }
 
-         if(isset($_POST["Zcode"])){
+        if(isset($_POST["Zcode"])){
           $Zcode = limpiarDatos($_POST["Zcode"]);
-         } else {
+        } else {
           $Zcode = null;
-         }
-
-         if(isset($_POST["Newsletter[]"])){
+        }
+          
+        if(isset($_POST["Newsletter[]"])){
           $Newsletter = limpiarDatos($_POST["Newsletter[]"]);
-         } else {
+        } else {
           $Newsletter = null;
-         }
+        }
 
-         if(isset($_POST["Newsletter_format"])){
+        if(isset($_POST["Newsletter_format"])){
           $NewsletterFormat = limpiarDatos($_POST["Newsletter_format"]);
-         } else {
+        } else {
           $NewsletterFormat = null;
-         }
-
-         if(isset($_POST["address"])){
+        }
+        
+        if(isset($_POST["address"])){
           $address = limpiarDatos($_POST["address"]);
-         } else {
+        } else {
           $address = null;
-         }
+        }
 
-         if(isset($_POST["othert"])){
+        if(isset($_POST["othert"])){
           $othert = limpiarDatos($_POST["othert"]);
-         } else {
+        } else {
           $othert = null;
-         }
-        /*====================================================================================00 */
+        }
+  /*==================================================================================== */
+    }else{
+      if ($name_err == true){
+          echo "El nombre que ha introducido no se corresponde con el formato solicitado";
+        }elseif($email_err == true){
+          echo "El email que ha introducido no se corresponde con el formato solicitado";
+        }elseif($phone_err == true){
+          echo "El número de teléfono que ha introducido no se corresponde con el formato solicitado";
+        }
     }
-        
-        
-  /*echo "$name<br>";
-  echo "$email<br>";
-  echo "$phone<br>";
-  echo "$address<br>";
-  echo "$city<br>";
-  echo "$communities<br>";
-  echo "$NewsletterFormat<br>";
-  echo "$othert<br>";*/
-
-
+  }else{
+    echo "Mensaje de valores requeridos que no han llegado";
+  }
 } else{
   echo "Método post no ha llegado";
 }
-
-
 ?>
