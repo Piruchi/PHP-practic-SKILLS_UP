@@ -95,8 +95,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           $city = null;
         }
         
-        if(isset($_POST["comunities"])){
-          $communities = limpiarDatos($_POST["comunities"]);
+        if(isset($_POST["communities"])){
+          $communities = limpiarDatos($_POST["communities"]);
         } else {
             $communities = null;
         }
@@ -107,16 +107,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           $Zcode = null;
         }
           
-        if(isset($_POST["Newsletter[]"])){
-          $Newsletter = limpiarDatos($_POST["Newsletter[]"]);
-        } else {
-          $Newsletter = null;
-        }
+        //if(isset($_POST["Newsletter[]"])){
+        //  $Newsletter = limpiarDatos($_POST["Newsletter[]"]);
+        //} else {
+        //  $Newsletter = null;
+        //}
+
 
         if(isset($_POST["Newsletter_format"])){
           $NewsletterFormat = limpiarDatos($_POST["Newsletter_format"]);
-        } else {
-          $NewsletterFormat = null;
+        } if ($NewsletterFormat=='fhtml'){
+          $NewsletterFormat=0;
+          }else{
+          $NewsletterFormat = 1;
         }
         
         if(isset($_POST["address"])){
@@ -141,7 +144,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   echo "Zcode = $Zcode<br>";
   echo "address = $address<br>";
   echo "NewsletterFormat = $NewsletterFormat<br>";
-  echo "Newsletter = $Newsletter<br>";
+  //echo "Newsletter = $Newsletter<br>";
   echo "othert = $othert<br>";
 
     }else{
