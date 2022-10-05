@@ -131,6 +131,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           $othert = null;
         }
   /*==================================================================================== */
+  // ============================================================= BORRAME
+
+  echo "name = $name<br>";
+  echo "phone = $phone<br>";
+  echo "email = $email<br>";
+  echo "ciry = $city<br>";
+  echo "communities = $communities<br>";
+  echo "Zcode = $Zcode<br>";
+  echo "address = $address<br>";
+  echo "NewsletterFormat = $NewsletterFormat<br>";
+  echo "Newsletter = $Newsletter<br>";
+  echo "othert = $othert<br>";
+
     }else{
       if ($name_err == true){
           echo "El nombre que ha introducido no se corresponde con el formato solicitado";
