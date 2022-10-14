@@ -106,12 +106,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
           $Zcode = null;
         }
+          //Lo que he cambiado hoy
+        $Newsletter = filter_input(
+          INPUT_POST, //Pilla el post del index
+          'Newsletter', //este es el name de tu input checkbox del array
+          FILTER_SANITIZE_SPECIAL_CHARS, //limpia datos
+          FILTER_REQUIRE_ARRAY //lo convierte en array
+        );
+        $string=implode(", " ,$Newsletter); //Mete en la variable $string todos los elementos del array + una coma
           
-        //if(isset($_POST["Newsletter[]"])){
-        //  $Newsletter = limpiarDatos($_POST["Newsletter[]"]);
-        //} else {
-        //  $Newsletter = null;
-        //}
+        
 
 
         if(isset($_POST["Newsletter_format"])){
@@ -144,7 +148,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   echo "Zcode = $Zcode<br>";
   echo "address = $address<br>";
   echo "NewsletterFormat = $NewsletterFormat<br>";
-  //echo "Newsletter = $Newsletter<br>";
+  echo "Newsletter = $string<br>";//lo que he cambiado hoy
   echo "othert = $othert<br>";
 
     }else{
@@ -162,4 +166,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 } else{
   echo "Método post no ha llegado";
 }
+/**
+ * HAY QUE HACER ESTO EL PRÓXIMO DÍA
+ * Tengo un arrar con tres opciones.
+ * Si me llega el array completo le asgino el valor 111.
+ * Si me llegan dos opciones hay una que no está marcada, debo averiguar cuál es la que no está marcada para asignarle el 0 a la que el usuario no ha marcado.
+ * Si me llega un dato hay dos opciones que no están marcadas, debo averigual cuál de las dos no está marcada para asignarle el 0 a las dos.
+ */
 ?>
+
