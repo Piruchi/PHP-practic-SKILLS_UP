@@ -15,8 +15,4 @@ try {
 
 ?>
 
-<?php //No 
-/*  $host = 'localhost';
-    $dbname = 'databasename';
-    $username = 'username';
-    $password = 'password'; */
+<?php

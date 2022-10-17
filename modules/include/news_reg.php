@@ -3,6 +3,7 @@
 
     $name = $email = $phone = $address = $city = $communities = $Zcode= $Newsletter= $NewsletterFormat = $othert="";
     $name_err = $email_err= $phone_err = false;
+    $checkNewsletter;
     //Declaro una función que usaré más adelante
     function limpiarDatos($data) {    //Esta función corrige errores previos que pueda haber puesto el usuario
         $data = trim($data);    //Limpia los espacios tanto detrás como delante del string
@@ -114,8 +115,40 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           FILTER_REQUIRE_ARRAY //lo convierte en array
         );
         $string=implode(", " ,$Newsletter); //Mete en la variable $string todos los elementos del array + una coma
-          
         
+        $lengArray=count($Newsletter);
+        echo "antes del switch " . $lengArray;
+        switch ($lengArray){
+
+          case 1:
+            if ($Newsletter[0] == "HTML"){
+              $checkNewsletter = 100;
+            } elseif ($Newsletter[0] == "CSS"){
+              $checkNewsletter = 010;
+            } else {
+              $checkNewsletter = 001;
+            }
+              break;
+
+          case 2:
+            if ($Newsletter[0] != "HTML"){
+              $checkNewsletter = 011;
+            } elseif ($Newsletter[0] != "CSS"){
+              $checkNewsletter = 101;
+            } else {
+              $checkNewsletter = 110;
+            }
+              break;
+
+          case 3:
+            $checkNewsletter = 111;
+            break;
+
+          default:
+            $checkNewsletter = 100;
+          }
+
+          echo "valor a devolver " . $checkNewsletter;
 
 
         if(isset($_POST["Newsletter_format"])){
@@ -150,6 +183,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   echo "NewsletterFormat = $NewsletterFormat<br>";
   echo "Newsletter = $string<br>";//lo que he cambiado hoy
   echo "othert = $othert<br>";
+  echo "Bit(3) = $checkNewsletter<br>";
+
+
+  /*Esto es para terminarlo en próximo día */
+  //Comprobar que los datos que se van a enviar no están repetidos en la base de datos
+  //SELECT fullname, email, phone from news_reg WHERE $name="fullname", $email, $phone
+
+  //INSERT INTO news_reg
+  //VALUES($name, $email, $phone, $address, $city, $communities, $Zcode, $Newsletter, $NewsletterFormat, $othert);
 
     }else{
       if ($name_err == true){
@@ -168,10 +210,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 /**
  * HAY QUE HACER ESTO EL PRÓXIMO DÍA
- * Tengo un arrar con tres opciones.
+ * Tengo un array con tres opciones.
  * Si me llega el array completo le asgino el valor 111.
  * Si me llegan dos opciones hay una que no está marcada, debo averiguar cuál es la que no está marcada para asignarle el 0 a la que el usuario no ha marcado.
  * Si me llega un dato hay dos opciones que no están marcadas, debo averigual cuál de las dos no está marcada para asignarle el 0 a las dos.
+ * 
+ * Array[] text1 text2 text3
+ * array[text2 text3] = 011
+ * array[text1] = 100
+ * 
+ * verlongitud(array[])
+ * 
+ * verlongitudarray = 0 => 100 001 010 111
+ * verlongitudarray = 3 => 111
+ * verlongitudarray = 1 =>¿?{
+ * array[?] == text1 => 100;
+ *    array[?] == text2 => 010;
+ *    array[?] == text3 => 001;
+ *    array[?,?] == text1 text2 => 110;
+ *    array[?,?] == text2 text3 => 011;
+ *    array[?,?] == text1 text3 => 101;
+ * }
+ *    
  */
 ?>
 
