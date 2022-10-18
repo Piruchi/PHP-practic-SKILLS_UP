@@ -133,7 +133,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           case 2:
             if ($Newsletter[0] != "HTML"){
               $checkNewsletter = bindec(011);
-            } elseif ($Newsletter[0] != "CSS"){
+            } elseif ($Newsletter[0] != "CSS" && $Newsletter[1] == "35"){
               $checkNewsletter = bindec(101);
             } else {
               $checkNewsletter = bindec(110);
@@ -190,8 +190,49 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   //Comprobar que los datos que se van a enviar no están repetidos en la base de datos
   //SELECT fullname, email, phone from news_reg WHERE $name="fullname", $email, $phone
 
-  //INSERT INTO news_reg
-  //VALUES($name, $email, $phone, $address, $city, $communities, $Zcode, $Newsletter, $NewsletterFormat, $othert);
+  try {
+      $sql = "SELECT * from news_reg WHERE fullname = :fullname OR email = :email OR phone = :phone";
+
+      $stmt = $conn->prepare($sql);
+
+      $stmt->bindParam(':fullname', $name, PDO::PARAM_STR);
+      $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+      $stmt->bindParam(':phone', $phone, PDO::PARAM_STR);
+
+      $stmt->execute();
+      $resultado = $stmt->fetchAll();
+      echo "Resultado es: " . var_dump($resultado) . "<br>";
+
+      if ($resultado){
+        echo "La información existe.<br>";
+      } else{
+        try {
+          $sql = "INSERT INTO news_reg (fullname, email, phone, address, city, state, zipcode, newsletters, format_news, suggestion) VALUES (:fullname, :email, :phone, :address, :city, :state, :zipcode, :newsletters, :format_news, :suggestion)";
+
+
+          $stmt = $conn->prepare($sql);
+          $stmt->bindParam('fullname', $name, PDO::PARAM_STR);
+          $stmt->bindParam('email', $email, PDO::PARAM_STR);
+          $stmt->bindParam('phone', $phone, PDO::PARAM_STR);
+          $stmt->bindParam('address', $address, PDO::PARAM_STR);
+          $stmt->bindParam('city', $city, PDO::PARAM_STR);
+          $stmt->bindParam('state', $communities, PDO::PARAM_STR);
+          $stmt->bindParam('zipcode', $Zcode, PDO::PARAM_STR);
+          $stmt->bindParam('newsletters', $checkNewsletter, PDO::PARAM_INT);
+          $stmt->bindParam('format_news', $NewsletterFormat, PDO::PARAM_INT);
+          $stmt->bindParam('suggestion', $othert, PDO::PARAM_STR);
+
+          $stmt->execute();
+          echo "Datos introducidos correctamente.<br>";
+          echo "Valor ingresado decimal de 3bit" . $checkNewsletter . "<br>";
+        } catch(PDOException $e){
+          echo $sql . "<br>" . $e->getMessage();
+        }
+        $conn = null;
+      }
+    } catch (PDOException $e){
+      echo $sql . "<br>" . $e->getMessage();
+    }
 
     }else{
       if ($name_err == true){
