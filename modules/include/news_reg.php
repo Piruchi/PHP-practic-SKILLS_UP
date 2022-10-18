@@ -122,30 +122,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
           case 1:
             if ($Newsletter[0] == "HTML"){
-              $checkNewsletter = 100;
+              $checkNewsletter = bindec(100);
             } elseif ($Newsletter[0] == "CSS"){
-              $checkNewsletter = 010;
+              $checkNewsletter = bindec(010);
             } else {
-              $checkNewsletter = 001;
+              $checkNewsletter = bindec(001);
             }
               break;
 
           case 2:
             if ($Newsletter[0] != "HTML"){
-              $checkNewsletter = 011;
+              $checkNewsletter = bindec(011);
             } elseif ($Newsletter[0] != "CSS"){
-              $checkNewsletter = 101;
+              $checkNewsletter = bindec(101);
             } else {
-              $checkNewsletter = 110;
+              $checkNewsletter = bindec(110);
             }
               break;
 
           case 3:
-            $checkNewsletter = 111;
+            $checkNewsletter = bindec(111);
             break;
 
           default:
-            $checkNewsletter = 100;
+            $checkNewsletter = bindec(100); //bindec() interpreta todos los valores de binary_string como enteros sin signo. Esto es debido a que bindec() considera al bit más significativo como otro orden de magnitud en lugar de como el bit de signo
           }
 
           echo "valor a devolver " . $checkNewsletter;
