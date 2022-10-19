@@ -17,7 +17,7 @@
 
     //Función para validar que el campo nombre no esté vacío y que además cumpla las condiciones que queremos
 function validar_nombre($name) {
-  if (!preg_match("/^[a-zA-Z-' ]*$/",$name)) {
+  if (!preg_match("/^[a-zñáéíóúü-' ]*$/i",$name)) {
       return false;
   }
   else {
@@ -36,7 +36,7 @@ function validar_movil($phone){
 
 ///^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/
 function validateEmail($email) {
-  if (!preg_match("/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/", $email)){
+  if (!preg_match("/^[^0-9][a-z0-9_]+([.][a-z0-9_]+)*[@][a-z0-9_]+([.][a-z0-9_]+)*[.][a-z]{2,4}$/i", $email)){
     return false;
   } else {
     return true;
