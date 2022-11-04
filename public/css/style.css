@@ -1,0 +1,49 @@
+.mainContainer{
+    /* border: solid 4px red; */
+    width: 100%;
+}
+
+.containerOne{
+    /*border: solid 2px blue;*/
+    display: grid;
+    grid-template-columns: repeat(4,2fr);
+}
+
+.h1DeTabla{
+    width: 70%;
+    /*border: solid black 4px;*/
+}
+
+.botonSubs{
+    background-color: #D9D9D9;
+    width: 30%;
+    font-size: 100%;
+    text-align: center;
+}
+
+.containerTable{
+    /*border: solid 2px green;*/
+    margin-top: 2em;
+    width: 100%;
+}
+
+.tabla{
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 15px ;
+    margin: 0 auto;
+}
+
+.tdTabla{
+    /*background-color: aqua;*/
+    background-color: aqua;
+    box-shadow: 0px 10px 10px -6px  #000000;
+    opacity: 10px;
+    border-radius: 10px 10px 10px 10px;
+}
+
+p{
+    padding-left: 1em;
+    font-weight: bold;
+}
+
