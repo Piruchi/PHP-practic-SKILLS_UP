@@ -3,6 +3,8 @@
 
     $name = $email = $phone = $address = $city = $communities = $Zcode= $Newsletter= $NewsletterFormat = $othert="";
     $name_err = $email_err= $phone_err = false;
+
+    // Variable que guarda el código en 3 bits a enviar
     $checkNewsletter;
     //Declaro una función que usaré más adelante
     function limpiarDatos($data) {    //Esta función corrige errores previos que pueda haber puesto el usuario
@@ -249,7 +251,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 } else{
   echo "Método post no ha llegado";
 }
-/**
+/** ESTO YA ESTÁ HECHO
  * HAY QUE HACER ESTO EL PRÓXIMO DÍA
  * Tengo un array con tres opciones.
  * Si me llega el array completo le asgino el valor 111.
