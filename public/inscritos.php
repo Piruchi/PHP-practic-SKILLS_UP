@@ -33,7 +33,7 @@
                 // require __DIR__. 'inc/post.php';
                 $sql = "SELECT * FROM news_reg";
                 $stmt = $conn->prepare($sql);
-                $smtm -> execute();
+                $stmt -> execute();
 
                 if ($result = $stmt->setFetchMode(PDO::FETCH_ASSOC)){
                     echo "<table class='tabla'>
@@ -53,16 +53,16 @@
                     </thead>";
                     foreach(($rows = $stmt->fetchAll()) as $row){
                             echo "<tr>
-                            <td class='tdTabla'><p>".$row['name']."</p></td>
+                            <td class='tdTabla'><p>".$row['fullname']."</p></td>
                             <td class='tdTabla'><p>".$row['email']."</p></td>
                             <td class='tdTabla'><p>".$row['phone']."</p></td>
                             <td class='tdTabla'><p>".$row['address']."</p></td>
                             <td class='tdTabla'><p>".$row['city']."</p></td>
-                            <td class='tdTabla'><p>".$row['communities']."</p></td>
-                            <td class='tdTabla'><p>".$row['Zcode']."</p></td>
-                            <td class='tdTabla'><p>".$row['Newsletter']."</p></td>
-                            <td class='tdTabla'><p>".$row['NewsletterFormat']."</p></td>
-                            <td class='tdTabla'><p>".$row['othert']."</p></td>
+                            <td class='tdTabla'><p>".$row['state']."</p></td>
+                            <td class='tdTabla'><p>".$row['zipcode']."</p></td>
+                            <td class='tdTabla'><p>".$row['newsletters']."</p></td>
+                            <td class='tdTabla'><p>".$row['format_news']."</p></td>
+                            <td class='tdTabla'><p>".$row['suggestion']."</p></td>
                         </tr>";
                     }
                 echo "</tr>

@@ -19,7 +19,7 @@
 
     //Función para validar que el campo nombre no esté vacío y que además cumpla las condiciones que queremos
 function validar_nombre($name) {
-  if (!preg_match("/^[a-zñáéíóúü-' ]*$/i",$name)) {
+  if (!preg_match("/^[a-zñáéíóúü\-' ]*$/i",$name)) {
       return false;
   }
   else {
