@@ -1,5 +1,5 @@
 <?php
-    require "../module/require/config.php";
+    require "../modules/require/config.php";
     htmlspecialchars($_SERVER['PHP_SELF']);
     $_SERVER['REQUEST_METHOD'] == null;
 ?>
